@@ -86,17 +86,16 @@
 
             {% for i in prods %}
             <div class="col-xs-3 col-sm-3 col-md-3 mb-2">
-              <div class="card allign-items-center" style="width: 18rem;">
+              <div class="card allign-items-center" style="width: 17rem;">
                 <img src='/media/{{i.image}}' id="img{{i.id}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title" id="name{{i.id}}">{{i.product_name|slice:"0:43"}}..</h5>
+                  <h5 class="card-title" id="name{{i.id}}">{{i.product_name|slice:"0:39"}}..</h5>
                   <h5 class="card-text" id="price{{i.id}}">₹ {{i.price}}</h5>
                   <span id="divpr{{i.id}}" class="divpr my-1">
                     <button id="pr{{i.id}}" class="btn btn-success cart">Add to Cart</button>
                   </span>
                   <a href="/productView/{{i.id}}">
-                    <button id="qv{{i.id}}" class="btn btn-success cart">Quick View</button></a>
-
+                    <button id="qv{{i.id}}" class="btn btn-success ">Quick View</button></a>
                 </div>
               </div>
             </div>
