@@ -90,12 +90,14 @@
   <input type="hidden" value=0 id="login_status">
   {% endif %}
 
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
-        <div class="spinner-border text-success" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div class="spinner-border text-success" style="width: 2.4rem; height: 2.2rem" role="status">
+          
+          <div class="spinner-grow text-success" style="width: 1.5rem; height: 1.5rem" role="status">
+            
+          </div>
         </div> Green <span style="color:rgb(99, 199, 99);">Beam </span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -118,17 +120,18 @@
           </li>
         </ul>
         {% if user.is_authenticated %}
-        <form class="form-inline my-2 my-lg-0" action="/search/" method="post">
+        <form class="d-flex" action="/search/" method="post">
           {% csrf_token %}
-          <input class="form-control me-1 " type="search" placeholder="Search" aria-label="Search" id="search"
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search"
             name="search">
           <button class="btn btn-outline-success me-1" type="submit">Search</button>
         </form>
+      
 
         
         <form action="/userlogout/" method="post">{% csrf_token %}
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle mb-1" type="button" id="dropdownMenuButton1"
+            <button class="btn btn-secondary dropdown-toggle mb-1 my-1" type="button" id="dropdownMenuButton1"
               data-bs-toggle="dropdown" aria-expanded="false">
               Welcome {{request.user}}
             </button>
@@ -361,6 +364,7 @@
 
           function addtoCart() {
             let proClick = document.querySelectorAll(".cart");
+            console.log(proClick)
             if (check_login_status()) {
               for (var i = 0; i < proClick.length; i++) {
                 proClick[i].addEventListener('click', function () {
