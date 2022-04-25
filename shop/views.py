@@ -1,7 +1,8 @@
 
 from ast import And
-from asyncio.windows_events import NULL
+
 from email import message
+from re import A
 from django.db.models.fields import CommaSeparatedIntegerField
 from numpy import product
 from rest_framework.parsers import JSONParser
@@ -193,8 +194,13 @@ def search(request):
 
 
 def productView(request, myid):
+    p ={}
     qvprods = Product.objects.filter(id=myid)
-    return render(request, 'shop/productView.html', {'qvprods':qvprods[0]})
+    exo = myid
+    p['qvprods']=qvprods[0]
+    p['exo']=exo
+    print(p)
+    return render(request, 'shop/productView.html',p )
 
 
 
