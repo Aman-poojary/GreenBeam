@@ -176,12 +176,18 @@
 
 
 
-    @media(max-width:400px) {
+    @media only screen and (max-width: 500px) {
         .total {
             margin-top: 25px;
         }
         .order_summary{
             font-size: 15px;
+        }
+        .opo{
+            font-size: x-small;
+        }
+        h5{
+            font-size: x-small;
         }
     }
 </style>
@@ -204,7 +210,7 @@
                     Order Id: {{order.0.order_id}}
                 </span class="ml-1">
                 <pre>   </pre>
-                <span style="color:rgb(99, 199, 99);">Ordered By: {{order.0.name}}</span>
+                <span style="color:rgb(99, 199, 99);">{{order.0.name}}</span>
             </button>
         </h4>
         <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse"
@@ -294,7 +300,6 @@
     let json_data = JSON.parse(element.innerHTML);
     let sum = 0
     let undhu_body = document.getElementById('undhu'+i);
-    console.log(undhu_body)
     undhu_body.innerHTML = " ";
     var timmimg= 0;
     for (const key in json_data) {
@@ -309,9 +314,9 @@
                 sum +=  dict_value[0] * dict_value[1];
                 undhu_body.innerHTML += ` 
                 
-                                    <tr>
+                                    <tr class="opo">
                                             <td>
-                                                <h5> ${dict_value[2]}</h5>
+                                                 ${dict_value[2].slice(0,30)}
                                             </td>
                                             <td>
                                                 ${dict_value[0]}</h5>
@@ -327,11 +332,34 @@
     <strong  class="badge " style="background-color: rgb(99, 199, 99);">Order Date:${timmimg}</strong>
     </div>` 
     i = i + 1;
-    
-  
 
  });
 
+ function updatePopover(shoppingcart) {
+      if(window.location.pathname=="/"){
+        var popStr = "";
+        popStr = popStr + "<div class= 'mx-2 my-2'>";
+          var i = 1;
+          d =sum();
+          if(d == 0){
+            pStr = "<h5>Cart is empty. Add products</h5>"
+            document.getElementById('popcart').setAttribute('data-content', pStr);
+          }
+          else{
+            for (var item in shoppingcart) {
+              popStr = popStr + "<b>" + i + "</b>.";
+              popStr = popStr + document.getElementById('name' + item.slice(2)).innerHTML +
+              " ...Qty:" + "<b>" + shoppingcart[item][0] + "</b>. <br>";
+              i += 1;
+            }
+            
+            popStr = popStr + "</div>";
+            document.getElementById('popcart').setAttribute('data-content', popStr);
+          }
+        }
+        
+          $('#popcart').popover({ trigger: "hover" });
+        }
 
 
 </script>
