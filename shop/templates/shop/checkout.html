@@ -102,12 +102,12 @@
 
     #cart-bottom .coupon p,
     #cart-bottom .coupon input {
-        padding: 0 12px;
+        padding: 0 5px;
     }
 
     #cart-bottom .coupon input {
         height: 43.2px;
-        margin: 0 0 20px 12px;
+        margin: 0 0 0px 8px;
     }
 
     #cart-bottom .total div>div {
@@ -131,16 +131,18 @@
     }
 
     @media only screen and (max-width: 400px) {
-  .total {
-    margin-top: 25px;
-  }
-  .undhu{
-      font-size: small;
-  }
-  .sheet_head{
-    font-size: x-small;
-  }
-}
+        .total {
+            margin-top: 25px;
+        }
+
+        .undhu {
+            font-size: small;
+        }
+
+        .sheet_head {
+            font-size: x-small;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -151,7 +153,7 @@
 <div class="alert alert-warning alert-dismissible" style="display: none;" id="message_bar"></div>
 
 <div class="alert alert-success alert-dismissible" style="display: none;" id="message_bar1"></div>
-<div class="alert alert-success alert-dismissible" style="display: none;" id="message_bar2"></div> 
+<div class="alert alert-success alert-dismissible" style="display: none;" id="message_bar2"></div>
 
 <div class="container my-4">
     <section class=" mt-2 container ">
@@ -161,12 +163,12 @@
 
     </section>
 
-    
+
     <section id="cart-container" class="container my-2">
-        <table width="100%"> 
+        <table width="100%">
             <br>
 
-            <thead >
+            <thead>
                 <tr class="sheet_head">
                     <td>Product</td>
                     <td>Price</td>
@@ -175,7 +177,7 @@
                 </tr>
             </thead>
             <tbody class="undhu">
-               
+
             </tbody>
         </table>
     </section>
@@ -186,16 +188,29 @@
                 <div>
                     <h5 style="margin: 0px;">COUPON</h5>
                     <P>Enter your coupon code if you have one.</P>
-                    <form >
-                    {% if user.is_authenticated %}
-                    <fieldset>
-                    {% else %}
-                    <fieldset disabled>
-                    {% endif %}
-                    <input type="text" placeholder="Coupon Code">
-                </form>
-                    <button class="pitasi btn btn-outline-success me-1" >APPLY COUPON</button>
+                    <!-- <form class="d-flex">
+                       
+                                <input class="form-control me-2" type="text" placeholder="Coupon Code"
+                                    aria-label="Coupon Code">
+                                    <button class="pitasi btn btn-outline-success me-1">APPLY COUPON</button>
+                                </form> -->
+                                {% if user.is_authenticated %}
+                                <fieldset>
+                                    {% else %}
+                                    <fieldset disabled>
+                                        {% endif %}
+                                        {% csrf_token %}
+                            <form class="row g-3">
+                                
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" id="Coupon Code" placeholder="Coupon Code">
+                                </div>
+                                <div class="col-auto">
+                                  <button type="submit" class="pitasi btn btn-outline-success mb-3 ml-2 ">APPLY COUPON</button>
+                                </div>
+                              </form>
                 </div>
+
 
             </div>
 
@@ -236,48 +251,52 @@
         <h2> Step 2 - Enter Address & Other Details</h2>
         <form method="post" action="/checkout/">{% csrf_token %}
             {% if user.is_authenticated %}
-			<fieldset>
-			{% else %}
-			<fieldset disabled>
-			{% endif %}
-            <input type="hidden" name="itemsJson" id="itemsJson">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputname">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St" required>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address line 2</label>
-                <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor" required>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="city" name="city" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <input type="text" class="form-control" id="state" name="state"  placeholder="Enter State" required>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="zip_code" name="zip_code" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputZip">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" name="phone" required>
-            </div>
-            <button type="submit"  class="btn btn-success">Place Order</button>
+            <fieldset>
+                {% else %}
+                <fieldset disabled>
+                    {% endif %}
+                    <input type="hidden" name="itemsJson" id="itemsJson">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputname">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Address line 2</label>
+                        <input type="text" class="form-control" id="address2" name="address2"
+                            placeholder="Apartment, studio, or floor" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="city" name="city" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter State"
+                                required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Zip</label>
+                            <input type="text" class="form-control" id="zip_code" name="zip_code" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputZip">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Place Order</button>
         </form>
     </div>
 </div>
@@ -292,7 +311,7 @@
     var coupon = 0;
     var tetal = 0;
 
-    document.querySelector('.pitasi').addEventListener('click', ()=>{
+    document.querySelector('.pitasi').addEventListener('click', () => {
         coupon = 1;
         let moneytotal = document.querySelector(".moneytotal");
         tetal = tetal - 49;
@@ -308,7 +327,7 @@
             message_bar.innerHTML = "";
         }, 3000);
     })
-  
+
     displayCart(shoppingcart);
 
 
@@ -317,18 +336,18 @@
         cartItems = JSON.parse(cartItems);
         let productContainer = document.querySelector(".undhu");
 
-        if (cartItems && productContainer){
+        if (cartItems && productContainer) {
             productContainer.innerHTML = '';
             for (var item in cartItems) {
                 let a = shoppingcart[item][1];
                 let b = shoppingcart[item][0];
                 a = a.slice(2,);
-                let sum = a*b;
+                let sum = a * b;
                 productContainer.innerHTML += `
                 <tbody class="undhu">
                     <tr>
                         <td>
-                            <b>${shoppingcart[item][2].slice(0,15)}...</b>
+                            <b>${shoppingcart[item][2].slice(0, 15)}...</b>
                         </td>
                         <td>
                            <b> ${shoppingcart[item][1]}</b>
@@ -355,7 +374,7 @@
         let tex = 50;
         if (moneymoney == 0) {
             tex = 0;
-        }   
+        }
         console.log(tex)
         let taxbvc = document.querySelector(".taxbvc");
         if (cartItems && taxbvc) {
@@ -368,13 +387,13 @@
         let moneytotal = document.querySelector(".moneytotal");
         if (cartItems && moneytotal) {
             moneytotal.innerHTML = '';
-            if(coupon ==0){
+            if (coupon == 0) {
                 moneytotal.innerHTML += `
             <h4><p><b>₹ ${tetal}<b></p></h4> `
             }
-          
 
-            
+
+
         }
     }
 
@@ -384,7 +403,7 @@
         window.location.reload();
     }
 
-document.getElementById("itemsJson").value = JSON.stringify(shoppingcart);
+    document.getElementById("itemsJson").value = JSON.stringify(shoppingcart);
 
 </script>
 
